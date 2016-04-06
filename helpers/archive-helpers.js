@@ -26,16 +26,27 @@ exports.initialize = function(pathsObj){
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(){
+  //paths.list
+  console.log("INSIDE readListOfUrls")
 };
 
 exports.isUrlInList = function(){
+  //paths.list
+  console.log("INSIDE isUrlInList")
 };
 
 exports.addUrlToList = function(){
+  //paths.list
+  console.log("INSIDE is in addUrlToList")
 };
 
 exports.isUrlArchived = function(){
+  //paths.archivedSites
+  //conditional statement to determine if it is in the archived sites path
+  //if it is return the path to archived site
+  console.log("INSIDE isUrlArchived")
 };
 
 exports.downloadUrls = function(){
+  console.log("INSIDE is in downloadUrls");
 };
