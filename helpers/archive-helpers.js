@@ -14,7 +14,8 @@ var  mime = require("mime");
 exports.paths = {
   siteAssets: path.join(__dirname, '../web/public'),
   archivedSites: path.join(__dirname, '../archives/sites'),
-  list: path.join(__dirname, '../archives/sites.txt') //turns paths to text?
+  list: path.join(__dirname, '../archives/sites.txt'), //turns paths to text?
+  testList: path.join(__dirname, '../testData/sites.txt')
 };
 
 // Used for stubbing paths for tests, do not modify
@@ -28,65 +29,80 @@ exports.initialize = function(pathsObj){
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(){
+  // var fileName = this.paths.list;
+  // var results;
+  // console.log("this is the exports.paths object", fileName)
+  // fs.readFile(fileName, 'utf8', function(err, data){
+  //   if(err){
+  //     throw err;
+  //     console.log(data)
+  //   } else {
+  //     console.log(data)
+  //     results = data.split('\n')
+  //     console.log("*************",results)
+  //     return data;
+  //   }
+  // })
+  //search through file's text for URL
   //paths.list
   //console.log("INSIDE readListOfUrls")
+// console.log('url in path object', this.paths.list)
 };
 
-console.log('url in path object', JSON.parse(this.paths.list)
 
 
 exports.isUrlInList = function(){
-  console.log('what is this object', this.paths);
-  var fileName = this.paths.list;
-  path.exists(fileName, function(exists) {
+  // console.log('what is this object', this.paths)
+  // var fileName = this.paths.list
+  // path.exists(fileName, function(exists) {
 
-  if(!exists) {
-    response.writeHead(404, {"Content-Type": "text/plain"});
-    response.write("404 Not Found\n");
-    response.end();
-    return;
+  // if(!exists) {
+  //   response.writeHead(404, {"Content-Type": "text/plain"});
+  //   response.write("404 Not Found\n");
+  //   response.end();
+  //   return;
 
-  }else{
-    fs.stat(fileName, function (error, stats) {
-      fs.open(fileName, "r", function (error, fd) {
-        var buffer = new Buffer(stats.size);
-        fs.read(fd, buffer, 0, buffer.length, null, function (error, bytesRead, buffer) {
-          var data = buffer.toString("utf8", 0, buffer.length);
-          console.log(data);
-          fs.close(fd);
-        });
-      });
-    });
+  // }else{
+  //   fs.stat(fileName, function (error, stats) {
+  //     fs.open(fileName, "r", function (error, fd) {
+  //       var buffer = new Buffer(stats.size);
+  //       fs.read(fd, buffer, 0, buffer.length, null, function (error, bytesRead, buffer) {
+  //         var data = buffer.toString("utf8", 0, buffer.length);
+  //         console.log(data);
+  //         fs.close(fd);
+  //       });
+  //     });
+  //   });
 
-  }
+  // };
 
-  if (fs.stat(fileName).isDirectory()) url += '/index.html';
+  // if (fs.stat(fileName).isDirectory()) url += '/index.html';
 
-    // fs.readFile(url, "binary", function(err, file) {
-    //   if(err) {
-    //     response.writeHead(500, {"Content-Type": "text/plain"});
-    //     response.write(err + "\n");
-    //     response.end();
-    //     return;
-    //   }
+  //   // fs.readFile(url, "binary", function(err, file) {
+  //   //   if(err) {
+  //   //     response.writeHead(500, {"Content-Type": "text/plain"});
+  //   //     response.write(err + "\n");
+  //   //     response.end();
+  //   //     return;
+  //   //   }
 
-  response.writeHead(200, {"Content-Type": mime.lookup(url)});
-  response.write(file, "binary");
-  response.end();
-    // });
+  // response.writeHead(200, {"Content-Type": mime.lookup(url)});
+  // response.write(file, "binary");
+  // response.end();
+  //   // });
 
-  });
-  //paths.list
-  // console.log("***************", exports.paths.archivedSites(theUrl));
-  //if the url is in the list return true
-  // pathExists(theUrl).then(function(exists){
-  //   if(exists){
-  //     exports.paths.archivedSites(theUrl)
-  //   } else {
-  //     console.log(404);
-  //   }
   // });
-  //console.log("INSIDE isUrlInList")
+  // //paths.list
+  // // console.log("***************", exports.paths.archivedSites(theUrl));
+  // //if the url is in the list return true
+  // // pathExists(theUrl).then(function(exists){
+  // //   if(exists){
+  // //     exports.paths.archivedSites(theUrl)
+  // //   } else {
+  // //     console.log(404);
+  // //   }
+  // // });
+  // //console.log("INSIDE isUrlInList")
 };
 
 exports.addUrlToList = function(){
