@@ -17,3 +17,9 @@ if (module.parent) {
   console.log("Listening on http://" + ip + ":" + port);
 }
 
+// if(req.url === "/"){
+//     req.pipe(filed('./public/index.html')).pipe(resp);
+//   }else{
+//     req.pipe(filed("./public" + req.url)).pipe(resp);
+//   }
+// });
