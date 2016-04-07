@@ -3,7 +3,7 @@ var path = require('path');
 var _ = require('underscore');
 var pathExists = require('path-exists');
 var httpGet = require('http-get');
-var  mime = require("mime")
+var  mime = require("mime");
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
  * Consider using the `paths` object below to store frequently used file paths. This way,
@@ -36,10 +36,10 @@ console.log('url in path object', JSON.parse(this.paths.list)
 
 
 exports.isUrlInList = function(){
-  console.log('what is this object', this.paths)
-  var fileName = this.paths.list
+  console.log('what is this object', this.paths);
+  var fileName = this.paths.list;
   path.exists(fileName, function(exists) {
-  
+
   if(!exists) {
     response.writeHead(404, {"Content-Type": "text/plain"});
     response.write("404 Not Found\n");
@@ -58,12 +58,12 @@ exports.isUrlInList = function(){
       });
     });
 
-  };
+  }
 
   if (fs.stat(fileName).isDirectory()) url += '/index.html';
 
     // fs.readFile(url, "binary", function(err, file) {
-    //   if(err) {        
+    //   if(err) {
     //     response.writeHead(500, {"Content-Type": "text/plain"});
     //     response.write(err + "\n");
     //     response.end();
