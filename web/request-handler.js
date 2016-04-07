@@ -3,6 +3,8 @@ var archive = require('../helpers/archive-helpers');
 var httpGet = require('http-get') //we added this but not sure if this is where it is needed
 // require more modules/folders here!
 var httpHelp = require('./http-helpers.js')
+var fs = require('fs');
+
 
 exports.handleRequest = function (req, res) {
   // console.log("The request handler is the gate keeper.  The request method is: ", req.method,"The request url is: ", req.url)
@@ -11,9 +13,25 @@ exports.handleRequest = function (req, res) {
   //console.log(req.get('/'))
   var statusCode = 200;
 
-  if(req.url === '/'){
-    res.end('<input')
-  }
+  // if(req.url === '/'){
+  //   res.end('<input')
+  // }
+
+  var fileName = archive.paths.siteAssets + '/index.html';
+  var results;
+  console.log("this is the exports.paths object", fileName)
+  fs.readFile(fileName, 'utf8', function(err, data){
+    if(err){
+      throw err;
+      console.log("#####################")
+    } else {
+      console.log(data)
+      results = data.split('\n')
+      console.log("*************",results)
+      console.log(data);
+      return data;
+    }
+  })
 
   // var actions = {
   //   GET: function(){

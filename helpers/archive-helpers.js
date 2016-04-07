@@ -29,20 +29,20 @@ exports.initialize = function(pathsObj){
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(){
-  var fileName = this.paths.list;
-  var results;
-  console.log("this is the exports.paths object", fileName)
-  fs.readFile(fileName, 'utf8', function(err, data){
-    if(err){
-      throw err;
-      console.log(data)
-    } else {
-      console.log(data)
-      results = data.split('\n')
-      console.log("*************",results)
-      return data;
-    }
-  })
+  // var fileName = this.paths.list;
+  // var results;
+  // console.log("this is the exports.paths object", fileName)
+  // fs.readFile(fileName, 'utf8', function(err, data){
+  //   if(err){
+  //     throw err;
+  //     console.log(data)
+  //   } else {
+  //     console.log(data)
+  //     results = data.split('\n')
+  //     console.log("*************",results)
+  //     return data;
+  //   }
+  // })
   //search through file's text for URL
   //paths.list
   //console.log("INSIDE readListOfUrls")
