@@ -16,6 +16,22 @@ exports.handleRequest = function (req, res) {
       //console.log('we in here!!!!!!', req.pipe(request(req.url)).pipe(res))
       req.pipe(request(req.url)).pipe(res)
       res.writehead(statusCode, httpHelp.headers)
+      type: 'GET'
+      url: 'http://api.joind.in/v2.1/talks/10889',
+      data: {},
+      dataType
+      error: function() {
+         $('#info').html('<p>An error has occurred</p>');
+      },
+      dataType: 'jsonp',
+      success: function(data) {
+         var $title = $('<h1>').text(data.talks[0].talk_title);
+         var $description = $('<p>').text(data.talks[0].talk_description);
+         $('#info')
+            .append($title)
+            .append($description);
+      },
+      type: 'GET'
     },
 
     POST: function(){
