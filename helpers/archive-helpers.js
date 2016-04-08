@@ -28,8 +28,14 @@ exports.initialize = function(pathsObj){
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-exports.readListOfUrls = function(){
-  // var fileName = this.paths.list;
+exports.readListOfUrls = function(callback){
+  var fileName = this.paths.list;
+  fs.ReadFile(fileName, function(err, sites){
+    sites = sites.toString().split('\n')
+    if(callback){
+      callback(sites);
+    }
+  });
   // var results;
   // console.log("this is the exports.paths object", fileName)
   // fs.readFile(fileName, 'utf8', function(err, data){
@@ -51,15 +57,27 @@ exports.readListOfUrls = function(){
 
 
 
-exports.isUrlInList = function(){
+exports.isUrlInList = function(callback){
+  var fileName = this.paths.list;
+  path.exists(fileName, function(exists){
+    if(!exists){
+      response.writeHead(404, {"Content-Type": "text/plain"});
+       response.write("404 Not Found\n");
+       response.end();
+    }else{
+      fs.open(fileName, 'r', function (error, fd){
+
+      });
+    }
+  });
+
+
   // console.log('what is this object', this.paths)
   // var fileName = this.paths.list
   // path.exists(fileName, function(exists) {
 
   // if(!exists) {
-  //   response.writeHead(404, {"Content-Type": "text/plain"});
-  //   response.write("404 Not Found\n");
-  //   response.end();
+  //
   //   return;
 
   // }else{

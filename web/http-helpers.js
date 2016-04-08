@@ -11,10 +11,28 @@ exports.headers = headers = {
 };
 
 exports.serveAssets = function(res, asset, callback) {
+  var encoding = {encoding : 'utf8'};
+
+  fs.readFile(archive.paths.siteAssets + asset, encoding, function(err, data){
+    if(err){
+      fs.readFile(archive.paths.archivedSites + asset, encoding, function(err, data){
+        if(err){
+          exports.send404(res);
+        } else {
+          exports.sendResponse(res, data);
+        }
+      });
+    } else{
+      exports.sendResponse(res,data);
+    }
+  });
+};
+
+
   // Write some code here that helps serve up your static files!
   // (Static files are things like html (yours or archived from others...),
   // css, or anything that doesn't change often.)
-};
+
 
   // Write some code here that helps serve up your static files!
   // (Static files are things like html (yours or archived from others...),
