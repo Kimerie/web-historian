@@ -30,7 +30,7 @@ exports.initialize = function(pathsObj){
 
 exports.readListOfUrls = function(callback){
   var fileName = this.paths.list;
-  fs.ReadFile(fileName, function(err, sites){
+  fs.readFile(fileName, function(err, sites){
     sites = sites.toString().split('\n')
     if(callback){
       callback(sites);
@@ -58,70 +58,32 @@ exports.readListOfUrls = function(callback){
 
 
 exports.isUrlInList = function(callback){
-  var fileName = this.paths.list;
-  path.exists(fileName, function(exists){
-    if(!exists){
-      response.writeHead(404, {"Content-Type": "text/plain"});
-       response.write("404 Not Found\n");
-       response.end();
-    }else{
-      fs.open(fileName, 'r', function (error, fd){
-
-      });
-    }
+  exports.readListOfUrls(function(sites){
+    var found = _.any(sites, function(site, i){
+      return site.match(url)
+    })
+    callback(found);
   });
-
-
-  // console.log('what is this object', this.paths)
-  // var fileName = this.paths.list
-  // path.exists(fileName, function(exists) {
-
-  // if(!exists) {
-  //
-  //   return;
-
-  // }else{
-  //   fs.stat(fileName, function (error, stats) {
-  //     fs.open(fileName, "r", function (error, fd) {
-  //       var buffer = new Buffer(stats.size);
-  //       fs.read(fd, buffer, 0, buffer.length, null, function (error, bytesRead, buffer) {
-  //         var data = buffer.toString("utf8", 0, buffer.length);
-  //         console.log(data);
-  //         fs.close(fd);
-  //       });
-  //     });
-  //   });
-
-  // };
-
-  // if (fs.stat(fileName).isDirectory()) url += '/index.html';
-
-  //   // fs.readFile(url, "binary", function(err, file) {
-  //   //   if(err) {
-  //   //     response.writeHead(500, {"Content-Type": "text/plain"});
-  //   //     response.write(err + "\n");
-  //   //     response.end();
-  //   //     return;
-  //   //   }
-
-  // response.writeHead(200, {"Content-Type": mime.lookup(url)});
-  // response.write(file, "binary");
-  // response.end();
-  //   // });
-
-  // });
-  // //paths.list
-  // // console.log("***************", exports.paths.archivedSites(theUrl));
-  // //if the url is in the list return true
-  // // pathExists(theUrl).then(function(exists){
-  // //   if(exists){
-  // //     exports.paths.archivedSites(theUrl)
-  // //   } else {
-  // //     console.log(404);
-  // //   }
-  // // });
-  // //console.log("INSIDE isUrlInList")
 };
+
+// var fileName = this.paths.list;
+//   fs.stat(fileName, function(error, stats){
+//     if(error){
+//       response.writeHead(404, {"Content-Type": "text/plain"});
+//        response.write("404 Not Found\n");
+//        response.end();
+//     }else{
+//       fs.open(fileName, 'r', function (error, fd){
+//         var buffer = new Buffer(stats.size);
+//         fs.read(fd, buffer, 0, buffer.length, null, function (error, bytesRead, buffer) {
+//             var data = buffer.toString("utf8", 0, buffer.length);
+//             console.log(data);
+//             fs.close(fd)
+//         });
+//       });
+//     }
+//   });
+// };
 
 exports.addUrlToList = function(){
   //paths.list

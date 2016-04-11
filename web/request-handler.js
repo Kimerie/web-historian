@@ -8,31 +8,41 @@ var httpHelp = require('./http-helpers.js')
 var fs = require('fs');
 
 
-exports.handleRequest = function (req, res) {
-  // console.log("The request handler is the gate keeper.  The request method is: ", req.method,"The request url is: ", req.url)
-  //res.writehead(statusCode, header)  header = httpHelp.headers
-  //console.log(archive.isUrlInList(req.url))
-  //console.log(req.get('/'))
-  var statusCode = 200;
-
-  // if(req.url === '/'){
-  //   res.end('<input')
-  // }
   var homePage = archive.paths.siteAssets + '/index.html';
 
   var actions = {
     'GET':  function(request, reponse){
             var parts = urlParser.parse(request.url);
-            parts.pathname;
-          },
-    'POST': function (request, reponse){
+            var urlPath = parts.pathname === '/' ? '/index.html' : parts.pathname
+            utils.serveAssets(response, urlPath);
+    },
 
+    'POST': function(request, response){
+      utils.collectData(request, function(data){
+        var url='www.twitter.com';
+        console.log(data);
+        archive.isUrlInList(url, function(found){
+          if(found){
+            archive.isUrlArchived(url, function(exists){
+              if(exists){
+                //display page
+              } else {
+                //display loading
+                };
+              });
+          } else {
+            archive.addUrlToList(url, function(){
+              utils.serveAssets(response, '/loading.html')
+            });
+          }
+        });
+      });
     }
   };
-};
+
 
   exports.handleRequest = function(request, response){
-    var action = actions[request.method];
+    var action = action[request.method];
     if(action){
       action(request, reponse);
     } else {
